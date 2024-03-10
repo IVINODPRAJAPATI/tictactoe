@@ -1,0 +1,116 @@
+!DOCTYPE html>
+<html lang="en">
+
+<head >
+  <meta charset="UTF-8">
+  <title>TicTacToe</title>
+  
+  <style>
+    .tictac {
+      display: grid;
+      margin-top: 100px;
+      margin-left: 50px;
+      margin-right: 50px;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 150px 150px 150px;
+      gap: 2px;
+      background-color: black;
+      border-color: black solid ;
+      border-width: 2.5px;
+    }
+
+    .item {
+      border: 1px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      cursor: pointer;
+      background-color: aqua;
+      border-width: 5px;
+      font-style:bold;
+    }
+    .head1{
+        background-color:indigo;
+        color: azure;
+        text-align: center;
+        height: 100px;
+        padding-top: 25px;
+        font-size: 75px;
+    }
+    .bodystyle{
+        background-color:#00BFFF;
+    }
+  </style>
+</head>
+
+<body class="bodystyle">
+    <h1 class="head1">Tic-Tac-Toe</h1>
+  <div class="tictac">
+    <div class="item" id="box1" onclick="Mark(0, 0)"></div>
+    <div class="item" id="box2" onclick="Mark(0, 1)"></div>
+    <div class="item" id="box3" onclick="Mark(0, 2)"></div>
+    <div class="item" id="box4" onclick="Mark(1, 0)"></div>
+    <div class="item" id="box5" onclick="Mark(1, 1)"></div>
+    <div class="item" id="box6" onclick="Mark(1, 2)"></div>
+    <div class="item" id="box7" onclick="Mark(2, 0)"></div>
+    <div class="item" id="box8" onclick="Mark(2, 1)"></div>
+    <div class="item" id="box9" onclick="Mark(2, 2)"></div>
+  </div>
+
+  <script>
+    let count = 0;
+    let a = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+
+    function check() {
+    
+      for (let i = 0; i < 3; i++) {
+        if (a[i][0] !== 0 && a[i][0] === a[i][1] && a[i][1] === a[i][2]) {
+          return a[i][0];
+        }
+      }
+
+    
+      for (let j = 0; j < 3; j++) {
+        if (a[0][j] !== 0 && a[0][j] === a[1][j] && a[1][j] === a[2][j]) {
+          return a[0][j];
+        }
+      }
+
+     
+      if (a[0][0] !== 0 && a[0][0] === a[1][1] && a[1][1] === a[2][2]) {
+        return a[0][0];
+      }
+      if (a[0][2] !== 0 && a[0][2] === a[1][1] && a[1][1] === a[2][0]) {
+        return a[0][2];
+      }
+
+   
+      if (!a.flat().includes(0)) {
+        return 'draw';
+      }
+
+      return 0;
+    }
+
+    function Mark(row, col) {
+      if (a[row][col] === 0) {
+        let box = document.getElementById("box" + (row * 3 + col + 1));
+        box.innerText = count % 2 === 0 ? 'X' : 'O';
+        a[row][col] = count % 2 === 0 ? 'X' : 'O';
+        count++;
+
+        let result = check();
+        if (result !== 0) {
+          if (result === 'draw') {
+            alert("Oops!! It's a draw.");
+          } else {
+            alert("Player " + result + " wins!");
+          }
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
